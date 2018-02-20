@@ -28,7 +28,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        testLoggedIn()
         setUpBg()
         setupScrollView()
         setUpLabels()
@@ -45,14 +44,7 @@ class LoginViewController: UIViewController {
         view.addSubview(scrollView)
         yToGoTo = view.frame.height / 3
     }
-    
-    func testLoggedIn() {
-        //NOT WORKING FOR STORING LOCALY ETC.
-        UserAuthHelper.isUserLoggedIn {
-            self.performSegue(withIdentifier: "loggedin", sender: self)
-        }
-    }
-    
+
     func setUpBg() {
         bgImage = UIImageView(frame: view.frame)
         bgImage.image = UIImage(named: "bg")

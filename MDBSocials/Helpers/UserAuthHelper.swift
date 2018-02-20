@@ -46,13 +46,16 @@ class UserAuthHelper {
         })
     }
     
-    static func isUserLoggedIn(withBlock: @escaping () -> ()) {
-        if Auth.auth().currentUser != nil {
-            withBlock()
-        } else {
-            print("no user logged in")
+    static func isUserLoggedIn(withBlock: @escaping (User) -> ()) {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            if let user = user {
+                withBlock(user)
+            } else {
+                // user is not logged in
+            }
         }
     }
+    
     
     
     
