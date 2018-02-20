@@ -69,7 +69,10 @@ class SignupViewController: UIViewController {
             let alert = UIAlertController(title: "Can't login", message: "Please don't leave any fields blank", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
+            OperationQueue.main.addOperation {
+                self.present(alert, animated: true, completion: nil)
+                self.view.endEditing(true)
+            }
             return
         }
         UserAuthHelper.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
@@ -77,7 +80,10 @@ class SignupViewController: UIViewController {
                 let alert = UIAlertController(title: "Can't Sign Up", message: error, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
+                OperationQueue.main.addOperation {
+                    self.present(alert, animated: true, completion: nil)
+                    self.view.endEditing(true)
+                }
             } else {
                 self.performSegue(withIdentifier: "signedup", sender: self)
             }
@@ -127,6 +133,7 @@ extension SignupViewController: UITextFieldDelegate {
         } else {
             // Not found, so remove keyboard.
             signupClicked()
+            textField.resignFirstResponder()
         }
         return false
     }

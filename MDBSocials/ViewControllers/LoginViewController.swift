@@ -121,7 +121,10 @@ class LoginViewController: UIViewController {
             let alert = UIAlertController(title: "Can't login", message: "Please don't leave any fields blank", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
+            OperationQueue.main.addOperation {
+                self.present(alert, animated: true, completion: nil)
+                self.view.endEditing(true)
+            }
             return
         }
         UserAuthHelper.logIn(email: emailTextField.text!, password: passwordTextField.text!) { (user, errorInfo) in
@@ -129,7 +132,10 @@ class LoginViewController: UIViewController {
                 let alert = UIAlertController(title: "Can't login ", message: errorInfo, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
+                OperationQueue.main.addOperation {
+                    self.present(alert, animated: true, completion: nil)
+                    self.view.endEditing(true)
+                }
             } else {
                 self.performSegue(withIdentifier: "loggedin", sender: self)
             }
@@ -179,7 +185,7 @@ extension LoginViewController: UITextFieldDelegate {
         } else {
             // Not found, so remove keyboard.
             loginClicked()
-            textField.endEditing(true)
+            textField.resignFirstResponder()
         }
         return false
     }
