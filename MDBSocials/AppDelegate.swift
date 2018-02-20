@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         UserAuthHelper.isUserLoggedIn { (user) in
-            self.window?.rootViewController?.performSegue(withIdentifier: "loggedin", sender: self)
+            //self.window?.rootViewController?.performSegue(withIdentifier: "loggedin", sender: self)
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feed")
         }
         return true
     }
