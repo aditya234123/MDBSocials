@@ -6,9 +6,7 @@
 //  Copyright © 2018 Aditya Yadav. All rights reserved.
 //
 
-import Foundation
 import Firebase
-import FirebaseAuthUI
 
 class UserAuthHelper {
 
@@ -34,26 +32,31 @@ class UserAuthHelper {
         }
     }
     
-    static func createUser(email: String, password: String, withBlock: @escaping (String) -> ()) {
+    static func createUser(email: String, password: String, withBlock: @escaping (User?, String) -> ()) {
         Auth.auth().createUser(withEmail: email, password: password, completion: { (user: User?, error) in
             if error == nil {
-                withBlock("")
+                withBlock(user, "")
             }
             else {
                 print(error.debugDescription)
-                withBlock((error?.localizedDescription)!)
+                withBlock(user, (error?.localizedDescription)!)
             }
         })
     }
     
+    
     static func isUserLoggedIn(withBlock: @escaping (User) -> ()) {
-        Auth.auth().addStateDidChangeListener { (auth, user) in
+        let listener = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
+                //can only be logged in on the initial time. Fixes some memory issues!
                 withBlock(user)
+
             } else {
                 // user is not logged in
             }
         }
+        Auth.auth().removeStateDidChangeListener(listener)
+        
     }
     
     

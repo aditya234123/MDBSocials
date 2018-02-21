@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8DS-51-ZmX">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,13 +20,30 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="LDv-MN-daL"/>
                     <connections>
-                        <segue destination="YJS-rB-Pt7" kind="show" identifier="loggedin" id="P6g-vb-yI8"/>
+                        <segue destination="YJS-rB-Pt7" kind="show" identifier="loggedin" id="mW2-gR-Cee"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="764" y="45"/>
+            <point key="canvasLocation" x="1556" y="-321"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8Gs-sV-XQJ">
+            <objects>
+                <navigationController id="8DS-51-ZmX" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O86-s0-hFS">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="yrT-NN-W0I"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f2G-0V-olc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="538" y="-71"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="9iY-8P-8yp">
@@ -39,12 +56,12 @@
                         <viewLayoutGuide key="safeArea" id="0Dw-4F-2Dw"/>
                     </view>
                     <connections>
-                        <segue destination="YJS-rB-Pt7" kind="show" identifier="signedup" id="FdY-28-0uk"/>
+                        <segue destination="YJS-rB-Pt7" kind="show" identifier="signedup" id="hHH-ZE-u8Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wRd-5g-0IL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1487" y="484"/>
+            <point key="canvasLocation" x="2025" y="480"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="3dU-f1-L3f">
@@ -56,13 +73,32 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="nke-Pg-hJc"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OKe-Yc-9te"/>
+                    <connections>
+                        <segue destination="Tk1-v2-sdt" kind="show" identifier="newsocial" id="IdW-Iv-kgE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CbC-Tq-oxA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2428" y="45"/>
+            <point key="canvasLocation" x="2938" y="-201"/>
+        </scene>
+        <!--New Social View Controller-->
+        <scene sceneID="E9C-VL-19n">
+            <objects>
+                <viewController id="Tk1-v2-sdt" customClass="NewSocialViewController" customModule="MDBSocials" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qki-8d-KZt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="UIk-Z7-hoJ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gtl-aP-YLu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3900" y="-201"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="P6g-vb-yI8"/>
+        <segue reference="hHH-ZE-u8Y"/>
     </inferredMetricsTieBreakers>
 </document>

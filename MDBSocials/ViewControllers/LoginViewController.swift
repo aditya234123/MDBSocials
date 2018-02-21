@@ -21,7 +21,6 @@ class LoginViewController: UIViewController {
     var registerButton: UIButton!
     
     var activeTextField: UITextField?
-    var keyboardHeight: CGFloat?
     
     var yToGoTo: CGFloat?
     
@@ -35,6 +34,10 @@ class LoginViewController: UIViewController {
         setUpLoginButton()
         setUpRegister()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     func setupScrollView() {

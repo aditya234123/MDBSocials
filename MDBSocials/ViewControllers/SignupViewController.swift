@@ -31,6 +31,10 @@ class SignupViewController: UIViewController {
         setUpTextFields()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     func setupBg() {
         bg = UIView(frame: view.frame)
         //rgb(84, 160, 255)
@@ -75,7 +79,7 @@ class SignupViewController: UIViewController {
             }
             return
         }
-        UserAuthHelper.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (error) in
+        UserAuthHelper.createUser(email: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error != "" {
                 let alert = UIAlertController(title: "Can't Sign Up", message: error, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -85,7 +89,9 @@ class SignupViewController: UIViewController {
                     self.view.endEditing(true)
                 }
             } else {
-                self.performSegue(withIdentifier: "signedup", sender: self)
+                self.dismiss(animated: true, completion: nil)
+                self.presentingViewController?.childViewControllers[0].performSegue(withIdentifier: "loggedin", sender: self)
+                FirebaseAPIClient.createNewUser(id: user!.uid, name: self.nameTextField.text!, email: self.emailTextField.text!, username: self.usernameTextField.text!)
             }
         }
     }
