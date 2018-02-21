@@ -44,6 +44,27 @@ class NewSocialViewController: UIViewController {
     
     @objc func postSelected() {
         
+        if self.nameTextField.text == "" || self.descriptionField.text == "" || self.dateTextField.text == "" || self.imageView.image == nil {
+            let alert = UIAlertController(title: "Can't Post", message: "Please don't leave any fields blank", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        UserAuthHelper.getCurrentUser { (user) in
+            FirebaseAPIClient.fetchUser(id: user.uid, withBlock: { (dict) in
+                let name = dict["name"] as! String
+                //saved post
+                FirebaseAPIClient.createNewPost(person: name, eventName: self.nameTextField.text!, date: self.dateTextField.text!, description: self.descriptionField.text!, withBlock: { (key) in
+                    //saved image
+                    StorageHelper.uploadMedia(postID: key, image: self.imageView.image!, withBlock: { () in
+                        //do something with image?
+                    })
+                })
+            })
+        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     func setUpScrollView() {

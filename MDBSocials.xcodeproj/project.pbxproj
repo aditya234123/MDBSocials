@@ -10,6 +10,8 @@
 		03AEA55A7D9A6EF8BD552825 /* Pods_MDBSocials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C53484DE5B44400503F3C55 /* Pods_MDBSocials.framework */; };
 		09FF0C039DAB367F118E818C /* Pods_MDBSocialsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B61428B66E2F12DA34A3A83 /* Pods_MDBSocialsUITests.framework */; };
 		1938D249203D6D9A00924DB3 /* FirebaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938D248203D6D9A00924DB3 /* FirebaseAPIClient.swift */; };
+		1938D24B203D79A000924DB3 /* StorageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938D24A203D79A000924DB3 /* StorageHelper.swift */; };
+		1938D24E203D7FC100924DB3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1938D24D203D7FC100924DB3 /* Post.swift */; };
 		194C525B203BBB15005FECA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C525A203BBB15005FECA1 /* AppDelegate.swift */; };
 		194C5260203BBB15005FECA1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194C525E203BBB15005FECA1 /* Main.storyboard */; };
 		194C5262203BBB15005FECA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 194C5261203BBB15005FECA1 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		1938D248203D6D9A00924DB3 /* FirebaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAPIClient.swift; sourceTree = "<group>"; };
+		1938D24A203D79A000924DB3 /* StorageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageHelper.swift; sourceTree = "<group>"; };
+		1938D24D203D7FC100924DB3 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		194C5257203BBB15005FECA1 /* MDBSocials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDBSocials.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194C525A203BBB15005FECA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		194C525F203BBB15005FECA1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,6 +127,14 @@
 			path = Clients;
 			sourceTree = "<group>";
 		};
+		1938D24C203D7FAE00924DB3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1938D24D203D7FC100924DB3 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		194C524E203BBB15005FECA1 = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +163,7 @@
 				194C525A203BBB15005FECA1 /* AppDelegate.swift */,
 				194C528A203BC475005FECA1 /* Extensions.swift */,
 				194C5296203D2F19005FECA1 /* FeedViewCell.swift */,
+				1938D24C203D7FAE00924DB3 /* Models */,
 				1938D247203D6D8500924DB3 /* Clients */,
 				194C5293203BD97F005FECA1 /* Helpers */,
 				194C5290203BD826005FECA1 /* ViewControllers */,
@@ -196,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				194C5294203BD998005FECA1 /* UserAuthHelper.swift */,
+				1938D24A203D79A000924DB3 /* StorageHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -496,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194C5289203BBB3C005FECA1 /* LoginViewController.swift in Sources */,
+				1938D24E203D7FC100924DB3 /* Post.swift in Sources */,
 				194C528B203BC475005FECA1 /* Extensions.swift in Sources */,
 				194C528F203BD81F005FECA1 /* FeedViewController.swift in Sources */,
 				194C528D203BCA43005FECA1 /* SignupViewController.swift in Sources */,
@@ -504,6 +519,7 @@
 				1938D249203D6D9A00924DB3 /* FirebaseAPIClient.swift in Sources */,
 				194C5297203D2F19005FECA1 /* FeedViewCell.swift in Sources */,
 				194C525B203BBB15005FECA1 /* AppDelegate.swift in Sources */,
+				1938D24B203D79A000924DB3 /* StorageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

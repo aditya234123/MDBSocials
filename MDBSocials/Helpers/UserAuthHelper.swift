@@ -59,6 +59,10 @@ class UserAuthHelper {
         
     }
     
+    static func getCurrentUser(withBlock: @escaping (User) -> ()) {
+        withBlock(Auth.auth().currentUser!)
+    }
+    
     
     
     

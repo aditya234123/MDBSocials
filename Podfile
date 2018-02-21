@@ -9,6 +9,7 @@ target 'MDBSocials' do
     pod 'Firebase/Core'
     pod 'FirebaseUI/Auth'
     pod 'Firebase/Database'
+    pod ‘Firebase/Storage’
 
   target 'MDBSocialsTests' do
     inherit! :search_paths
