@@ -52,8 +52,8 @@ class FeedViewController: UIViewController {
                 self.restofPosts.sort(by: { (x, y) -> Bool in
                     return x.date! < y.date!
                 })
-                self.posts = self.firstPost + self.restofPosts
             }
+            self.posts = self.firstPost + self.restofPosts
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
