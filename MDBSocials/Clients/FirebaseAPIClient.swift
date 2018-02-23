@@ -27,8 +27,14 @@ class FirebaseAPIClient {
         withBlock(key)
     }
     
+    static func createNewInterested(userID: String, postID: String){
+        let ref = Database.database().reference()
+        let key = ref.child("Interested").childByAutoId().key
+        ref.child("Interested").setValue([postID : [userID : ""]])
+    }
+    
+    
     static func fetchUser(id: String, withBlock: @escaping (NSDictionary) -> ()) {
-        //TODO: Implement a method to fetch posts with Firebase!
         let ref = Database.database().reference()
         ref.child("Users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
             let dict = snapshot.value as? NSDictionary
@@ -38,12 +44,43 @@ class FirebaseAPIClient {
     }
     
     static func fetchPosts(withBlock: @escaping (Post) -> ()) {
-        //TODO: Implement a method to fetch posts with Firebase!
         let ref = Database.database().reference()
         ref.child("Posts").observe(.childAdded, with: { (snapshot) in
             let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
             withBlock(post)
         })
+    }
+    
+    static func fetchInterested(postID: String, withBlock: @escaping (String) -> ()) {
+        let ref = Database.database().reference().child("Interested")
+        ref.child(postID).observe(.childAdded, with: { (snapshot) in
+            withBlock(snapshot.key)
+        })
+    }
+    
+    static func fetchRSVP(postID: String, withBlock: @escaping (Int) -> ()) {
+        let ref = Database.database().reference()
+        ref.child("Posts").child(postID).observe(.childChanged, with: { (snapshot) in
+            withBlock(snapshot.value as! Int)
+        })
+    }
+    
+    static func eventRSVP(postID: String, userID: String) {
+        let ref = Database.database().reference()
+        ref.child("Posts").child(postID).runTransactionBlock({ (currentData:MutableData) -> TransactionResult in
+            if var post = currentData.value as? [String: AnyObject] {
+                
+                var rsvpCount = post["RSVP"] as? Int ?? 0
+                rsvpCount += 1
+                post["RSVP"] = rsvpCount as AnyObject?
+                currentData.value = post
+                
+                return TransactionResult.success(withValue: currentData)
+            }
+            return TransactionResult.abort()
+        })
+        
+        ref.child("Interested").child(postID).setValue([userID : ""])
     }
     
 }

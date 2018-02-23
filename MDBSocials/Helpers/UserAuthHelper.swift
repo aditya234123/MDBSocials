@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import FirebaseAuthUI
 
 class UserAuthHelper {
 

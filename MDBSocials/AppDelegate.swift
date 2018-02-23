@@ -20,9 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         UIApplication.shared.statusBarStyle = .lightContent
         
+        let nav = self.window?.rootViewController as! UINavigationController
+        nav.hero.isEnabled = true
+        
         UserAuthHelper.isUserLoggedIn { (user) in
             self.initial = false
-            let nav = self.window?.rootViewController as! UINavigationController
             let feedVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "feed")
             nav.isNavigationBarHidden = false
             nav.pushViewController(feedVC, animated: false)

@@ -10,6 +10,7 @@ target 'MDBSocials' do
     pod 'FirebaseUI/Auth'
     pod 'Firebase/Database'
     pod ‘Firebase/Storage’
+    pod 'Hero', '~> 1.1'
 
   target 'MDBSocialsTests' do
     inherit! :search_paths

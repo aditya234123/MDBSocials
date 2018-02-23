@@ -17,6 +17,7 @@ class Post {
     var RSVP: Int?
     var date: String?
     var description: String?
+    var userInterested: Bool?
     
     init(id: String, postDict: [String:Any?]?) {
         self.id = id
@@ -36,8 +37,8 @@ class Post {
             if let RSVP = postDict!["RSVP"] as? Int {
                 self.RSVP = RSVP
             }
+            userInterested = false
         }
     }
-    
 
 }

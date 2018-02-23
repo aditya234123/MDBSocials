@@ -22,6 +22,9 @@ class NewSocialViewController: UIViewController {
     
     var yToGoTo: CGFloat?
     
+    //current user saved
+    var currentUser: UserModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
@@ -52,18 +55,12 @@ class NewSocialViewController: UIViewController {
             return
         }
         
-        UserAuthHelper.getCurrentUser { (user) in
-            FirebaseAPIClient.fetchUser(id: user.uid, withBlock: { (dict) in
-                let name = dict["name"] as! String
-                //saved post
-                FirebaseAPIClient.createNewPost(person: name, eventName: self.nameTextField.text!, date: self.dateTextField.text!, description: self.descriptionField.text!, withBlock: { (key) in
-                    //saved image
-                    StorageHelper.uploadMedia(postID: key, image: self.imageView.image!, withBlock: { () in
-                        //do something with image?
-                    })
-                })
-            })
-        }
+        
+        FirebaseAPIClient.createNewPost(person: (currentUser?.name)!, eventName: self.nameTextField.text!, date: self.dateTextField.text!, description: self.descriptionField.text!, withBlock: { (key) in
+            StorageHelper.uploadMedia(postID: key, image: self.imageView.image!)
+            FirebaseAPIClient.createNewInterested(userID: (self.currentUser?.id!)!, postID: key)
+        })
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -132,6 +129,7 @@ class NewSocialViewController: UIViewController {
         }
         alert.addAction(cameraAction)
         alert.addAction(libraryAction)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
     }

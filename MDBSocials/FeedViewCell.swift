@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Hero
 
 class FeedViewCell: UICollectionViewCell {
     
@@ -33,8 +34,6 @@ class FeedViewCell: UICollectionViewCell {
         self.starImageView.image = starImage
         contentView.addSubview(starImageView)
         
-        //rgb(52, 73, 94)
-        //rgb(149, 165, 166)
         let mainTextColor = UIColor(red: 52/255, green: 73/255, blue: 94/255, alpha: 1.0)
         let secondTextColor = UIColor(red: 149/255, green: 165/255, blue: 166/255, alpha: 1.0)
         

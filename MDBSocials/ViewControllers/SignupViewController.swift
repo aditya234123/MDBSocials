@@ -37,7 +37,6 @@ class SignupViewController: UIViewController {
     
     func setupBg() {
         bg = UIView(frame: view.frame)
-        //rgb(84, 160, 255)
         bg.backgroundColor = UIColor(red: 84/255, green: 160/255, blue: 255/255, alpha: 1.0)
         view.addSubview(bg)
     }
@@ -56,12 +55,10 @@ class SignupViewController: UIViewController {
     
     func setupSignUpButton() {
         signupButton = UIButton(frame: CGRect(x: 0, y: self.preferredContentSize.height - 60, width: self.preferredContentSize.width, height: 60))
-        //rgb(29, 209, 161)
         let buttonColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
         signupButton.backgroundColor = buttonColor
         signupButton.setTitle("Sign Up", for: .normal)
         signupButton.setTitleColor(.white, for: .normal)
-        //rgb(255, 159, 243)
         let selectedColor = UIColor(red: 255/255, green: 159/255, blue: 243/255, alpha: 1.0)
         signupButton.setBackgroundColor(selectedColor, for: .highlighted)
         signupButton.addTarget(self, action: #selector(signupClicked), for: .touchUpInside)
@@ -137,7 +134,6 @@ extension SignupViewController: UITextFieldDelegate {
         if let next = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             next.becomeFirstResponder()
         } else {
-            // Not found, so remove keyboard.
             signupClicked()
             textField.resignFirstResponder()
         }

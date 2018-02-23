@@ -11,16 +11,12 @@ import FirebaseStorage
 
 class StorageHelper {
     
-    static func uploadMedia(postID: String, image: UIImage, withBlock: @escaping () -> Void) {
+    static func uploadMedia(postID: String, image: UIImage) {
         let storage = Storage.storage().reference().child(postID)
         if let uploadData = UIImageJPEGRepresentation(image, 0.3) {
             storage.putData(uploadData, metadata: nil) { (metadata, error) in
                 if error != nil {
                     print("error")
-                } else {
-                    let url = metadata?.downloadURL()?.absoluteString
-                    //send url in?
-                    withBlock()
                 }
             }
         }

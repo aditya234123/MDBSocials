@@ -96,14 +96,13 @@ class LoginViewController: UIViewController {
         let offset = view.frame.width * 2 / 15
         
         loginButton = UIButton(frame: CGRect(x: offset, y: view.frame.height / 3 + 180, width: view.frame.width - offset * 2, height: 50))
-        //rgb(255, 107, 129)
         let bg = UIColor(red: 255/255, green: 107/255, blue: 129/255, alpha: 1.0)
         loginButton.backgroundColor = bg
         loginButton.setTitle("Login", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.titleLabel?.textAlignment = .center
         loginButton.layer.cornerRadius = 10
-        //rgb(0, 210, 211)
+
         let seletedColor = UIColor(red: 0/255, green: 210/255, blue: 211/255, alpha: 1.0)
         loginButton.setBackgroundColor(seletedColor, for: .highlighted)
         loginButton.clipsToBounds = true
@@ -178,7 +177,6 @@ extension LoginViewController: UITextFieldDelegate {
         if let next = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             next.becomeFirstResponder()
         } else {
-            // Not found, so remove keyboard.
             loginClicked()
             textField.resignFirstResponder()
         }
