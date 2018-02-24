@@ -153,7 +153,9 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if userID == self.currentUser?.id {
                 post.userInterested = true
                 let image = UIImage(named: "star2")
-                cell.starImageView.image = image
+                DispatchQueue.main.async {
+                    cell.starImageView.image = image
+                }
             }
         }
         FirebaseAPIClient.fetchRSVP(postID: post.id!) { (rsvpNum) in
@@ -167,7 +169,9 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         if post.userInterested! {
             let image = UIImage(named: "star2")
-            cell.starImageView.image = image
+            DispatchQueue.main.async {
+                cell.starImageView.image = image
+            }
         }
         
         cell.image.hero.id = "image" + "\(indexPath.item)"
