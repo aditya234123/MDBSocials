@@ -199,15 +199,15 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     //snow icon
                     img = UIImage(named: "snow")!
                 }
-                if type == "clear-day" || type == "clear-night" || type == "wind" || type == "fog" {
+                else if type == "clear-day" || type == "clear-night" || type == "wind" || type == "fog" {
                     //sun
                     img = UIImage(named: "sun")!
                 }
-                if type == "cloudy" || type == "partly-cloudy-day" || type == "partly-cloudy-night" {
+                else if type == "cloudy" || type == "partly-cloudy-day" || type == "partly-cloudy-night" {
                     //cloud
                     img = UIImage(named: "cloudy")!
                 }
-                if type == "rain" || type == "thunderstorm" || type == "tornado" {
+                else if type == "rain" || type == "thunderstorm" || type == "tornado" {
                     //rain
                     img = UIImage(named: "rain")!
                 }

@@ -41,6 +41,7 @@ class Post {
     var description: String?
     var userInterested: Bool?
     var location: String?
+    var iconImg: UIImage?
     
     init(id: String, postDict: [String:Any?]?) {
         self.id = id

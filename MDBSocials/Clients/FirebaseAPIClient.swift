@@ -103,6 +103,17 @@ class FirebaseAPIClient {
             withBlock(id)
         })
     }
+    
+    static func getPostInfo(postID: String, withBlock: @escaping (Post) -> ()) {
+        
+        let ref = Database.database().reference().child("Posts")
+        ref.child(postID).observeSingleEvent(of: .value) { (snapshot) in
+            let post = Post(id: snapshot.key, postDict: snapshot.value as! [String : Any]?)
+            withBlock(post)
+        }
+        
+        
+    }
 
     /* IMPLEMENT LATER
     

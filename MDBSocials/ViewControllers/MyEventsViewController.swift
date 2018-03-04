@@ -10,7 +10,6 @@ import UIKit
 
 class MyEventsViewController: UIViewController {
     
-    var postIDs = [String]()
     var interestedPosts = [Post]()
 
     var collectionView: UICollectionView!
@@ -32,10 +31,15 @@ class MyEventsViewController: UIViewController {
     
     func getMyInterestedPosts() {
         FirebaseAPIClient.getUserInterests(userID: userID!) { (postID) in
-            self.postIDs.append(postID)
-            print(postID)
+            FirebaseAPIClient.getPostInfo(postID: postID, withBlock: { (post) in
+                self.interestedPosts.append(post)
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            })
         }
         //promises good here
+        /*
         FirebaseAPIClient.fetchPosts { (post) in
             if (self.postIDs.contains(post.id!)) {
                 self.interestedPosts.append(post)
@@ -44,6 +48,8 @@ class MyEventsViewController: UIViewController {
                 }
             }
         }
+         */
+        
     }
     
     
@@ -85,6 +91,9 @@ extension MyEventsViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        // Implement Dark Sky Here as well. Could pass data into.
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "feedCell", for: indexPath) as! FeedViewCell
         for var x: UIView in cell.contentView.subviews {
             x.removeFromSuperview()
@@ -143,7 +152,8 @@ extension MyEventsViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "toDetail", sender: self)
+        //IMPLEMENT
+        //self.performSegue(withIdentifier: "toDetail", sender: self)
     }
 
 }
