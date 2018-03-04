@@ -64,7 +64,6 @@ extension InterestedListView: UITableViewDelegate, UITableViewDataSource {
         //fetch image
         StorageHelper.getProfilePic(id: nameToID[names[indexPath.row]]!) { (image) in
             DispatchQueue.main.async {
-                print("GETS IMAGE")
                 cell.profilePic.image  = image
                 cell.setNeedsLayout()
             }

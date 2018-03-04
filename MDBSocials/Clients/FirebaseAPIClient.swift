@@ -13,24 +13,29 @@ class FirebaseAPIClient {
 
     static func createNewUser(id: String, name: String, email: String, username: String) {
         let usersRef = Database.database().reference().child("Users")
-        let newUser = ["name": name, "email": email, "username": username]
+        let newUser = ["name": name, "email": email, "username": username, "Interested" : ""]
         let childUpdates = ["/\(id)/": newUser]
         usersRef.updateChildValues(childUpdates)
     }
     
-    static func createNewPost(person: String, eventName: String, date: String, description: String, location: String, withBlock: @escaping (String) -> ()) {
+    static func createNewPost(id: String?, person: String, eventName: String, date: String, description: String, location: String, withBlock: @escaping (String) -> ()) {
         let ref = Database.database().reference()
         let key = ref.child("Posts").childByAutoId().key
         let post = ["Person": person, "Event": eventName, "RSVP": 0, "Date": date, "Description": description, "Location" : location] as [String : Any]
         let childUpdates = ["/Posts/\(key)": post]
         ref.updateChildValues(childUpdates)
         withBlock(key)
+        
+        let otherChanges = [key : ""] as [String : String]
+        let moreChildUpdates = ["/Users/" + id! + "/Interested": otherChanges]
+        ref.updateChildValues(moreChildUpdates)
     }
     
-    static func createNewInterested(userID: String, postID: String){
+    static func createNewInterested(user: UserModel, postID: String){
         let ref = Database.database().reference()
         let key = ref.child("Interested").childByAutoId().key
-        ref.child("Interested").setValue([postID : [userID : ""]])
+        //fix.
+        ref.child("Interested").updateChildValues([postID : [user.id! : user.name!]])
     }
     
     
@@ -84,6 +89,19 @@ class FirebaseAPIClient {
             return TransactionResult.abort()
         })
         ref.child("Interested").child(postID).setValue([user.id! : user.name!])
+        let post = [postID : ""] as [String : String]
+        let childUpdates = ["/Users/"+user.id!+"/Interested": post]
+        ref.updateChildValues(childUpdates)
     }
+    
+    
+    static func getUserInterests(userID: String, withBlock: @escaping (String) -> ()) {
+        let ref = Database.database().reference().child("Users").child(userID).child("Interested")
+        ref.observe(.childAdded, with: { (snapshot) in
+            let id = snapshot.key as! String
+            withBlock(id)
+        })
+    }
+    
     
 }

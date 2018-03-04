@@ -20,6 +20,7 @@ class NewSocialViewController: UIViewController {
     var datePicker: UIDatePicker!
     var descriptionLabel: UILabel!
     var locationTextField: UITextField!
+    var tabBarCover: UIView!
     
     var yToGoTo: CGFloat?
     
@@ -36,6 +37,11 @@ class NewSocialViewController: UIViewController {
         setUpDate()
         setUpDescription()
         setUpLocation()
+        /*
+        tabBarCover = UIView(frame: CGRect(x: 0, y: view.frame.height - (self.tabBarController?.tabBar.frame.height)!, width: view.frame.width, height: (self.tabBarController?.tabBar.frame.height)!))
+        tabBarCover.backgroundColor = .blue
+        view.addSubview(tabBarCover)
+         */
     }
     
     func setUpNavBar() {
@@ -58,9 +64,9 @@ class NewSocialViewController: UIViewController {
         }
         
         
-        FirebaseAPIClient.createNewPost(person: (currentUser?.name)!, eventName: self.nameTextField.text!, date: self.dateTextField.text!, description: self.descriptionField.text!, location: self.locationTextField.text!, withBlock: { (key) in
+        FirebaseAPIClient.createNewPost(id: currentUser?.id, person: (currentUser?.name)!, eventName: self.nameTextField.text!, date: self.dateTextField.text!, description: self.descriptionField.text!, location: self.locationTextField.text!, withBlock: { (key) in
             StorageHelper.uploadMedia(postID: key, image: self.imageView.image!)
-            FirebaseAPIClient.createNewInterested(userID: (self.currentUser?.id!)!, postID: key)
+            FirebaseAPIClient.createNewInterested(user: self.currentUser!, postID: key)
         })
         
         self.navigationController?.popViewController(animated: true)
@@ -175,6 +181,7 @@ class NewSocialViewController: UIViewController {
         descriptionField.textContainer.lineBreakMode = .byTruncatingTail
         descriptionField.font = UIFont(name: "HelveticaNeue-Light", size: 18)
         descriptionField.delegate = self
+        descriptionField.tag = 5
         
         scrollView.addSubview(descriptionField)
     }
@@ -192,7 +199,7 @@ class NewSocialViewController: UIViewController {
         locationTextField.textColor = barColor
         locationTextField.textAlignment = .center
         locationTextField.attributedPlaceholder = NSAttributedString(string: "Location", attributes: [NSAttributedStringKey.foregroundColor: placeholderColor])
-        locationTextField.tag = 1
+        locationTextField.tag = 4
         locationTextField.delegate = self
         scrollView.addSubview(locationTextField)
     }
@@ -227,14 +234,15 @@ extension NewSocialViewController: UITextFieldDelegate {
             datePickerView.datePickerMode = UIDatePickerMode.dateAndTime
             textField.inputView = datePickerView
             datePickerView.addTarget(self, action: #selector(datePickerValueChanged), for: UIControlEvents.valueChanged)
-            
-            let offset = textField.frame.origin.y - yToGoTo!
-            if offset > 0 {
-                UIView.animate(withDuration: 0.5, animations: {
-                    let point = CGPoint(x: 0, y: offset)
-                    self.scrollView.setContentOffset(point, animated: true)
-                })
-            }
+
+        }
+        
+        let offset = textField.frame.origin.y - yToGoTo!
+        if offset > 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                let point = CGPoint(x: 0, y: offset)
+                self.scrollView.setContentOffset(point, animated: true)
+            })
         }
         
     }

@@ -46,14 +46,12 @@ class UserAuthHelper {
     }
     
     
-    static func isUserLoggedIn(withBlock: @escaping (User) -> ()) {
+    static func isUserLoggedIn(withBlock: @escaping (Bool) -> ()) {
         let listener = Auth.auth().addStateDidChangeListener { (auth, user) in
             if let user = user {
-                //can only be logged in on the initial time. Fixes some memory issues!
-                withBlock(user)
-
+                withBlock(true)
             } else {
-                // user is not logged in
+                withBlock(false)
             }
         }
         Auth.auth().removeStateDidChangeListener(listener)

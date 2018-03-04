@@ -27,7 +27,9 @@ class StorageHelper {
         let ref = Storage.storage().reference().child(id)
         ref.getData(maxSize: 1 * 4096 * 4096) { data, error in
             if let error = error {
-                print(error)
+                getProfilePic(id: id, withBlock: { (image) in
+                    withBlock(image)
+                })
             } else {
                 let image = UIImage(data: data!)
                 withBlock(image!)

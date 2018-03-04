@@ -32,6 +32,9 @@
 		194ECF99204B661E00F99FCD /* InterestedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF98204B661E00F99FCD /* InterestedListView.swift */; };
 		194ECF9B204B780900F99FCD /* InterestedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF9A204B780900F99FCD /* InterestedListCell.swift */; };
 		194ECF9D204B7C1900F99FCD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF9C204B7C1900F99FCD /* MapViewController.swift */; };
+		194ECF9F204B8A3100F99FCD /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF9E204B8A3100F99FCD /* EmptyViewController.swift */; };
+		194ECFA1204B8F3F00F99FCD /* MyEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECFA0204B8F3F00F99FCD /* MyEventsViewController.swift */; };
+		194ECFA3204BA69D00F99FCD /* DarkSkyAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECFA2204BA69D00F99FCD /* DarkSkyAPIHelper.swift */; };
 		F8CC1E25C01850FFC62C52C8 /* Pods_MDBSocialsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DFEB785A8607F5B926246C /* Pods_MDBSocialsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +85,9 @@
 		194ECF98204B661E00F99FCD /* InterestedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedListView.swift; sourceTree = "<group>"; };
 		194ECF9A204B780900F99FCD /* InterestedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedListCell.swift; sourceTree = "<group>"; };
 		194ECF9C204B7C1900F99FCD /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		194ECF9E204B8A3100F99FCD /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
+		194ECFA0204B8F3F00F99FCD /* MyEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEventsViewController.swift; sourceTree = "<group>"; };
+		194ECFA2204BA69D00F99FCD /* DarkSkyAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSkyAPIHelper.swift; sourceTree = "<group>"; };
 		29DFEB785A8607F5B926246C /* Pods_MDBSocialsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDBSocialsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C53484DE5B44400503F3C55 /* Pods_MDBSocials.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDBSocials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B61428B66E2F12DA34A3A83 /* Pods_MDBSocialsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDBSocialsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +140,7 @@
 		192B2D712049139200B9235C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				194ECF9A204B780900F99FCD /* InterestedListCell.swift */,
 				194C5296203D2F19005FECA1 /* FeedViewCell.swift */,
 			);
 			path = Cells;
@@ -183,6 +190,7 @@
 			children = (
 				194C525A203BBB15005FECA1 /* AppDelegate.swift */,
 				194C528A203BC475005FECA1 /* Extensions.swift */,
+				194ECFA4204BB60000F99FCD /* Views */,
 				192B2D712049139200B9235C /* Cells */,
 				1938D24C203D7FAE00924DB3 /* Models */,
 				1938D247203D6D8500924DB3 /* Clients */,
@@ -193,9 +201,6 @@
 				194C5263203BBB15005FECA1 /* LaunchScreen.storyboard */,
 				194C5266203BBB15005FECA1 /* Info.plist */,
 				194C5291203BD8B1005FECA1 /* GoogleService-Info.plist */,
-				194ECF96204B624D00F99FCD /* AKModalView.swift */,
-				194ECF98204B661E00F99FCD /* InterestedListView.swift */,
-				194ECF9A204B780900F99FCD /* InterestedListCell.swift */,
 			);
 			path = MDBSocials;
 			sourceTree = "<group>";
@@ -227,6 +232,8 @@
 				194C5298203D3222005FECA1 /* NewSocialViewController.swift */,
 				1938D253203F60CA00924DB3 /* DetailViewController.swift */,
 				194ECF9C204B7C1900F99FCD /* MapViewController.swift */,
+				194ECF9E204B8A3100F99FCD /* EmptyViewController.swift */,
+				194ECFA0204B8F3F00F99FCD /* MyEventsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -236,8 +243,18 @@
 			children = (
 				194C5294203BD998005FECA1 /* UserAuthHelper.swift */,
 				1938D24A203D79A000924DB3 /* StorageHelper.swift */,
+				194ECFA2204BA69D00F99FCD /* DarkSkyAPIHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		194ECFA4204BB60000F99FCD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				194ECF96204B624D00F99FCD /* AKModalView.swift */,
+				194ECF98204B661E00F99FCD /* InterestedListView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		86652AF4545EDAA861495254 /* Pods */ = {
@@ -541,11 +558,14 @@
 				194ECF99204B661E00F99FCD /* InterestedListView.swift in Sources */,
 				194C528B203BC475005FECA1 /* Extensions.swift in Sources */,
 				194C528F203BD81F005FECA1 /* FeedViewController.swift in Sources */,
+				194ECF9F204B8A3100F99FCD /* EmptyViewController.swift in Sources */,
 				194ECF9B204B780900F99FCD /* InterestedListCell.swift in Sources */,
+				194ECFA3204BA69D00F99FCD /* DarkSkyAPIHelper.swift in Sources */,
 				194C528D203BCA43005FECA1 /* SignupViewController.swift in Sources */,
 				194C5299203D3222005FECA1 /* NewSocialViewController.swift in Sources */,
 				194C5295203BD998005FECA1 /* UserAuthHelper.swift in Sources */,
 				1938D249203D6D9A00924DB3 /* FirebaseAPIClient.swift in Sources */,
+				194ECFA1204B8F3F00F99FCD /* MyEventsViewController.swift in Sources */,
 				194C5297203D2F19005FECA1 /* FeedViewCell.swift in Sources */,
 				194C525B203BBB15005FECA1 /* AppDelegate.swift in Sources */,
 				1938D252203E735500924DB3 /* UserModel.swift in Sources */,

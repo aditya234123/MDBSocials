@@ -12,6 +12,8 @@ target 'MDBSocials' do
     pod ‘Firebase/Storage’
     pod 'Hero', '~> 1.1'
     pod 'Spring', :git => 'https://github.com/MengTo/Spring.git'
+    pod 'Alamofire', '~> 4.6'
+    pod 'SwiftyJSON'
 
   target 'MDBSocialsTests' do
     inherit! :search_paths

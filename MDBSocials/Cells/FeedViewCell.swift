@@ -24,11 +24,14 @@ class FeedViewCell: UICollectionViewCell {
     var date: UILabel!
     var id: String?
     
+    var bgClearIcon: UIImageView!
+    
     var delegate: feedViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setUpCell()
+        setUpBG()
+        setUpCell()
     }
     
     func setUpCell() {
@@ -81,6 +84,15 @@ class FeedViewCell: UICollectionViewCell {
     @objc func labelTapped() {
         
         delegate?.addModalView(id: self.id!)
+    }
+    
+    func setUpBG() {
+        
+        bgClearIcon = UIImageView(frame: CGRect(x: contentView.frame.height + 40, y: 15, width: contentView.frame.width - (contentView.frame.height + 15), height: contentView.frame.width - (contentView.frame.height + 15)))
+        bgClearIcon.alpha = 0.3
+        bgClearIcon.image = UIImage(named: "rain")
+        addSubview(bgClearIcon)
+        
     }
     
     

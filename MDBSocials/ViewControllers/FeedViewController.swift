@@ -8,6 +8,8 @@
 
 import UIKit
 import Hero
+import MapKit
+import CoreLocation
 
 class FeedViewController: UIViewController {
     
@@ -20,13 +22,24 @@ class FeedViewController: UIViewController {
     var currentUser: UserModel?
     
     override func viewDidLoad() {
+        setUpTabBar()
+        setUpNavBar()
         getCurrentUser()
         self.hero.isEnabled  = true
         getPosts()
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
-        setUpNavBar()
         self.setUpCollectionView()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func setUpTabBar() {
+        let barColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
+        self.tabBarController?.tabBar.barTintColor = barColor
+        self.tabBarController?.tabBar.isTranslucent = false
+        self.tabBarController?.tabBar.tintColor = .white
     }
     
     func getCurrentUser() {
@@ -43,6 +56,7 @@ class FeedViewController: UIViewController {
     func getPosts() {
         
         FirebaseAPIClient.fetchPosts { (post) in
+            /*
             if self.firstPost.count == 0 {
                 self.firstPost.append(post)
             } else {
@@ -53,9 +67,20 @@ class FeedViewController: UIViewController {
                     return x.date! < y.date!
                 })
             }
-            self.posts = self.firstPost + self.restofPosts
+             */
+            let currentDate = Date.init()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.medium
+            dateFormatter.timeStyle = DateFormatter.Style.short
+            let currentDateStr = dateFormatter.string(from: currentDate)
+            if post.date! >= currentDateStr {
+            self.posts.append(post)
+            self.posts.sort(by: { (x, y) -> Bool in
+                return x.date! < y.date!
+            })
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+            }
             }
         }
     }
@@ -72,6 +97,7 @@ class FeedViewController: UIViewController {
         
         let plusImage = UIImage(named: "plus")
         let plusButton = UIBarButtonItem(image: plusImage, style: .plain, target: self, action: #selector(newPost))
+        
         
         self.navigationItem.title = "Feed"
         self.navigationItem.leftBarButtonItem = logoutButton
@@ -93,7 +119,7 @@ class FeedViewController: UIViewController {
     
     @objc func logout() {
         UserAuthHelper.logOut {
-            self.navigationController?.popToRootViewController(animated: true)
+            self.dismiss(animated: false, completion: nil)
         }
     }
     
@@ -102,6 +128,8 @@ class FeedViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        self.tabBarController?.tabBar.isHidden = true
         if segue.identifier == "toDetail" {
             let destVC = segue.destination as! DetailViewController
             let imgHero = "image" + "\(selectedCell!)"
@@ -146,6 +174,53 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.awakeFromNib()
         cell.delegate = self
         let post = posts[indexPath.item]
+        
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = post.location
+        let search = MKLocalSearch(request: request)
+        search.start { response, error in
+            guard let response = response else {
+                print("There was an error searching for: \(request.naturalLanguageQuery) error: \(error)")
+                return
+            }
+            let first = response.mapItems[0]
+            let lat = first.placemark.coordinate.latitude
+            let lon = first.placemark.coordinate.longitude
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.medium
+            dateFormatter.timeStyle = DateFormatter.Style.short
+            let date = dateFormatter.date(from: post.date!)
+            let epochTime = date?.timeIntervalSince1970
+            DarkSkyAPIHelper.findForecast(lat: lat, lon: lon, time: epochTime!, withBlock: { (type) in
+                print(type)
+                
+                var img = UIImage()
+                if type == "snow" || type == "sleet" || type == "hail" {
+                    //snow icon
+                    img = UIImage(named: "snow")!
+                }
+                if type == "clear-day" || type == "clear-night" || type == "wind" || type == "fog" {
+                    //sun
+                    img = UIImage(named: "sun")!
+                }
+                if type == "cloudy" || type == "partly-cloudy-day" || type == "partly-cloudy-night" {
+                    //cloud
+                    img = UIImage(named: "cloudy")!
+                }
+                if type == "rain" || type == "thunderstorm" || type == "tornado" {
+                    //rain
+                    img = UIImage(named: "rain")!
+                }
+                
+                cell.bgClearIcon.image = img
+                
+            })
+            
+        }
+        
+        
+        
+        
         cell.id = post.id
         StorageHelper.getProfilePic(id: post.id!, withBlock: { (image) in
             post.image = image
@@ -155,7 +230,6 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         })
         
-        //FIX THIS SADNESS
         FirebaseAPIClient.fetchInterested(postID: post.id!) { (arr) in
             if arr[0] == self.currentUser?.id {
                 post.userInterested = true
