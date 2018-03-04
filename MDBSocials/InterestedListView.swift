@@ -54,6 +54,10 @@ extension InterestedListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Interestedcell") as! InterestedListCell
         //gonna need to show name here.
+        for var x: UIView in cell.contentView.subviews {
+            x.removeFromSuperview()
+        }
+        
         cell.awakeFromNib()
         cell.name.text = names[indexPath.row]
         

@@ -73,10 +73,28 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="5hL-nW-AyV"/>
                     </view>
+                    <connections>
+                        <segue destination="UJm-rn-9c8" kind="show" identifier="toMap" id="A7w-LQ-Q2s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5du-Pw-KVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3406" y="545"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="Hcq-IX-0rj">
+            <objects>
+                <viewController id="UJm-rn-9c8" customClass="MapViewController" customModule="MDBSocials" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VaI-AV-knk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="ioN-fN-sPl"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CFI-Gg-EUp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4216" y="571"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="3dU-f1-L3f">

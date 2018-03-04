@@ -19,6 +19,7 @@ class NewSocialViewController: UIViewController {
     var dateTextField: UITextField!
     var datePicker: UIDatePicker!
     var descriptionLabel: UILabel!
+    var locationTextField: UITextField!
     
     var yToGoTo: CGFloat?
     
@@ -34,6 +35,7 @@ class NewSocialViewController: UIViewController {
         setUpImage()
         setUpDate()
         setUpDescription()
+        setUpLocation()
     }
     
     func setUpNavBar() {
@@ -47,7 +49,7 @@ class NewSocialViewController: UIViewController {
     
     @objc func postSelected() {
         
-        if self.nameTextField.text == "" || self.descriptionField.text == "" || self.dateTextField.text == "" || self.imageView.image == nil {
+        if self.nameTextField.text == "" || self.descriptionField.text == "" || self.dateTextField.text == "" || self.imageView.image == nil || self.locationTextField.text == "" {
             let alert = UIAlertController(title: "Can't Post", message: "Please don't leave any fields blank", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(action)
@@ -56,7 +58,7 @@ class NewSocialViewController: UIViewController {
         }
         
         
-        FirebaseAPIClient.createNewPost(person: (currentUser?.name)!, eventName: self.nameTextField.text!, date: self.dateTextField.text!, description: self.descriptionField.text!, withBlock: { (key) in
+        FirebaseAPIClient.createNewPost(person: (currentUser?.name)!, eventName: self.nameTextField.text!, date: self.dateTextField.text!, description: self.descriptionField.text!, location: self.locationTextField.text!, withBlock: { (key) in
             StorageHelper.uploadMedia(postID: key, image: self.imageView.image!)
             FirebaseAPIClient.createNewInterested(userID: (self.currentUser?.id!)!, postID: key)
         })
@@ -66,7 +68,7 @@ class NewSocialViewController: UIViewController {
     
     func setUpScrollView() {
         scrollView = UIScrollView(frame: view.frame)
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 800)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 850)
         view.addSubview(scrollView)
         yToGoTo = view.frame.height / 3
     }
@@ -156,13 +158,13 @@ class NewSocialViewController: UIViewController {
         let barColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
         let offset = view.frame.width * 2 / 15
         
-        descriptionLabel = UILabel(frame: CGRect(x: offset, y: 580, width: view.frame.width, height: 20))
+        descriptionLabel = UILabel(frame: CGRect(x: offset, y: 650, width: view.frame.width, height: 20))
         descriptionLabel.textColor = barColor
         descriptionLabel.text = "Description :"
         descriptionLabel.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         scrollView.addSubview(descriptionLabel)
         
-        descriptionField = UITextView(frame: CGRect(x: offset, y: 620, width: view.frame.width - offset * 2, height: 80))
+        descriptionField = UITextView(frame: CGRect(x: offset, y: 680, width: view.frame.width - offset * 2, height: 80))
         descriptionField.backgroundColor = .clear
         descriptionField.layer.borderColor = barColor.cgColor
         descriptionField.layer.borderWidth = 1
@@ -175,6 +177,24 @@ class NewSocialViewController: UIViewController {
         descriptionField.delegate = self
         
         scrollView.addSubview(descriptionField)
+    }
+    
+    func setUpLocation() {
+        let barColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
+        let offset = view.frame.width * 2 / 15
+        let placeholderColor = UIColor(red: 220/255, green: 221/255, blue: 225/255, alpha: 1.0)
+        
+        locationTextField = UITextField(frame: CGRect(x: offset, y: 580, width: view.frame.width - offset * 2, height: 50))
+        locationTextField.backgroundColor = .clear
+        locationTextField.layer.borderColor = barColor.cgColor
+        locationTextField.layer.borderWidth = 1
+        locationTextField.layer.cornerRadius = 10
+        locationTextField.textColor = barColor
+        locationTextField.textAlignment = .center
+        locationTextField.attributedPlaceholder = NSAttributedString(string: "Location", attributes: [NSAttributedStringKey.foregroundColor: placeholderColor])
+        locationTextField.tag = 1
+        locationTextField.delegate = self
+        scrollView.addSubview(locationTextField)
     }
     
     

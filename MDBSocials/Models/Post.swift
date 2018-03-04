@@ -18,6 +18,7 @@ class Post {
     var date: String?
     var description: String?
     var userInterested: Bool?
+    var location: String?
     
     init(id: String, postDict: [String:Any?]?) {
         self.id = id
@@ -36,6 +37,9 @@ class Post {
             }
             if let RSVP = postDict!["RSVP"] as? Int {
                 self.RSVP = RSVP
+            }
+            if let location = postDict!["Location"] as? String {
+                self.location = location
             }
             userInterested = false
         }

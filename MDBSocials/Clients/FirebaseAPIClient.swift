@@ -18,10 +18,10 @@ class FirebaseAPIClient {
         usersRef.updateChildValues(childUpdates)
     }
     
-    static func createNewPost(person: String, eventName: String, date: String, description: String, withBlock: @escaping (String) -> ()) {
+    static func createNewPost(person: String, eventName: String, date: String, description: String, location: String, withBlock: @escaping (String) -> ()) {
         let ref = Database.database().reference()
         let key = ref.child("Posts").childByAutoId().key
-        let post = ["Person": person, "Event": eventName, "RSVP": 0, "Date": date, "Description": description] as [String : Any]
+        let post = ["Person": person, "Event": eventName, "RSVP": 0, "Date": date, "Description": description, "Location" : location] as [String : Any]
         let childUpdates = ["/Posts/\(key)": post]
         ref.updateChildValues(childUpdates)
         withBlock(key)

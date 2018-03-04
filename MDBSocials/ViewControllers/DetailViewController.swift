@@ -30,8 +30,24 @@ class DetailViewController: UIViewController {
     
     func setUpView() {
         self.hero.isEnabled = true
+        setUpNav()
         setUpImage()
         setUpText()
+    }
+    
+    func setUpNav() {
+        let image = UIImage(named: "pin")
+        let pin = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(toMap))
+        self.navigationItem.rightBarButtonItem = pin
+    }
+    
+    @objc func toMap() {
+        performSegue(withIdentifier: "toMap", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destVC = segue.destination as! MapViewController
+        destVC.queryString = post?.location
     }
     
     func setUpImage() {

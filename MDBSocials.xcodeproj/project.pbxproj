@@ -31,6 +31,7 @@
 		194ECF97204B624D00F99FCD /* AKModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF96204B624D00F99FCD /* AKModalView.swift */; };
 		194ECF99204B661E00F99FCD /* InterestedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF98204B661E00F99FCD /* InterestedListView.swift */; };
 		194ECF9B204B780900F99FCD /* InterestedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF9A204B780900F99FCD /* InterestedListCell.swift */; };
+		194ECF9D204B7C1900F99FCD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ECF9C204B7C1900F99FCD /* MapViewController.swift */; };
 		F8CC1E25C01850FFC62C52C8 /* Pods_MDBSocialsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DFEB785A8607F5B926246C /* Pods_MDBSocialsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		194ECF96204B624D00F99FCD /* AKModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKModalView.swift; sourceTree = "<group>"; };
 		194ECF98204B661E00F99FCD /* InterestedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedListView.swift; sourceTree = "<group>"; };
 		194ECF9A204B780900F99FCD /* InterestedListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestedListCell.swift; sourceTree = "<group>"; };
+		194ECF9C204B7C1900F99FCD /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		29DFEB785A8607F5B926246C /* Pods_MDBSocialsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDBSocialsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C53484DE5B44400503F3C55 /* Pods_MDBSocials.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDBSocials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B61428B66E2F12DA34A3A83 /* Pods_MDBSocialsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MDBSocialsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +226,7 @@
 				194C528E203BD81F005FECA1 /* FeedViewController.swift */,
 				194C5298203D3222005FECA1 /* NewSocialViewController.swift */,
 				1938D253203F60CA00924DB3 /* DetailViewController.swift */,
+				194ECF9C204B7C1900F99FCD /* MapViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				1938D252203E735500924DB3 /* UserModel.swift in Sources */,
 				194ECF97204B624D00F99FCD /* AKModalView.swift in Sources */,
 				1938D24B203D79A000924DB3 /* StorageHelper.swift in Sources */,
+				194ECF9D204B7C1900F99FCD /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
