@@ -8,6 +8,7 @@
 
 import Firebase
 import FirebaseDatabase
+import PromiseKit
 
 class FirebaseAPIClient {
 
@@ -102,6 +103,18 @@ class FirebaseAPIClient {
             withBlock(id)
         })
     }
+
+    /* IMPLEMENT LATER
     
+    static func fetchPostsAtOnce() -> Promise<[Post]> {
+        
+         let ref = Database.database().reference().child("Posts")
+        ref.observeSingleEvent(of: .value) { (snapshot) in
+            
+        }
+        
+    }
+    
+    */
     
 }

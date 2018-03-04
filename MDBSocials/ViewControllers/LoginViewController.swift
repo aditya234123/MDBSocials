@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
     
     func setUpLabels() {
         welcomeLabel = UILabel(frame: CGRect(x: 30, y: view.frame.height / 3 - 70, width: view.frame.width - 60, height: 50))
-        welcomeLabel.text = "Welcome"
+        welcomeLabel.text = "MDBSocials"
         welcomeLabel.textColor = .white
         welcomeLabel.textAlignment = .center
         welcomeLabel.font = UIFont(name: "KohinoorDevanagari-Light", size: 47)

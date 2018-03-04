@@ -143,7 +143,6 @@ extension MyEventsViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //selectedCell = indexPath.item
         self.performSegue(withIdentifier: "toDetail", sender: self)
     }
 

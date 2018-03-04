@@ -7,8 +7,30 @@
 //
 
 import UIKit
+//import ObjectMapper
 
 class Post {
+    
+    /* IMPLEMENT LATER
+
+    required init?(map: Map) {
+        
+    }
+    
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        personName <- map["personName"]
+        eventName <- map["personName"]
+        image <- map["image"]
+        RSVP <- map["RSVP"]
+        date <- map["date"]
+        description <- map["description"]
+        userInterested <- map["userInterested"]
+        location <- map["location"]
+    }
+ 
+     */
 
     var id: String?
     var personName: String?

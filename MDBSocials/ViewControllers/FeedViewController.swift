@@ -107,7 +107,7 @@ class FeedViewController: UIViewController {
     
     func setUpCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 100, right: 10)
         layout.minimumLineSpacing = 10
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - (self.navigationController?.navigationBar.frame.height)!), collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
@@ -212,8 +212,10 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     img = UIImage(named: "rain")!
                 }
                 
-                cell.bgClearIcon.image = img
-                
+                DispatchQueue.main.async {
+                    cell.bgClearIcon.image = img
+                    cell.setNeedsLayout()
+                }
             })
             
         }

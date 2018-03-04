@@ -24,7 +24,6 @@ class DarkSkyAPIHelper {
         Alamofire.request(url).responseData { (response) in
             if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
                 
-                //only using this one rn
                 let json = try? JSON(data: response.data!)
                 let icon = json!["currently"]["icon"]
                 resultString = icon.description

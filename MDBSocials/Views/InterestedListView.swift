@@ -53,7 +53,7 @@ extension InterestedListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Interestedcell") as! InterestedListCell
-        //gonna need to show name here.
+
         for var x: UIView in cell.contentView.subviews {
             x.removeFromSuperview()
         }
@@ -61,7 +61,6 @@ extension InterestedListView: UITableViewDelegate, UITableViewDataSource {
         cell.awakeFromNib()
         cell.name.text = names[indexPath.row]
         
-        //fetch image
         StorageHelper.getProfilePic(id: nameToID[names[indexPath.row]]!) { (image) in
             DispatchQueue.main.async {
                 cell.profilePic.image  = image

@@ -24,7 +24,6 @@ class MapViewController: UIViewController {
         
         let request = MKLocalSearchRequest()
         
-        //ADD LOCAITON QUERY HERE.
         request.naturalLanguageQuery = queryString!
         
         request.region = map.region

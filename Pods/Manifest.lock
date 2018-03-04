@@ -53,6 +53,16 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - ObjectMapper (3.1.0)
+  - PromiseKit (6.0.0):
+    - PromiseKit/CorePromise (= 6.0.0)
+    - PromiseKit/Foundation (= 6.0.0)
+    - PromiseKit/UIKit (= 6.0.0)
+  - PromiseKit/CorePromise (6.0.0)
+  - PromiseKit/Foundation (6.0.0):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.0.0):
+    - PromiseKit/CorePromise
   - Spring (1.0.5)
   - SwiftyJSON (4.0.0)
 
@@ -63,6 +73,8 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseUI/Auth
   - Hero (~> 1.1)
+  - ObjectMapper (~> 3.1)
+  - PromiseKit (~> 6.0)
   - Spring (from `https://github.com/MengTo/Spring.git`)
   - SwiftyJSON
 
@@ -90,9 +102,11 @@ SPEC CHECKSUMS:
   Hero: ce59e81c79390613d97b43da7179e2c5e1017e04
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
+  PromiseKit: 328e809a7cdb435d35587c54e5f3dea935f9fc63
   Spring: 48aad470f3ead043b2da98b64e0bf0630b7ebc42
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: fb04ac2cd08e4e3c52c495b590e195c6420cb7ba
+PODFILE CHECKSUM: 8f3149510fb79ce8d04a3415531767a077d0926a
 
 COCOAPODS: 1.1.1
