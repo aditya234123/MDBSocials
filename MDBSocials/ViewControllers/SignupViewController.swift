@@ -18,7 +18,8 @@ class SignupViewController: UIViewController {
     var emailTextField: UITextField!
     var usernameTextField: UITextField!
     var passwordTextField: UITextField!
-    var restofView: UIView!
+    var selectImageButton: UIButton!
+    var imageView: UIImageView!
     
     var yToGoTo: CGFloat?
     
@@ -29,11 +30,45 @@ class SignupViewController: UIViewController {
         setupScrollView()
         setupSignUpButton()
         setUpTextFields()
+        setUpProfilePic()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
     }
+    
+    func setUpProfilePic() {
+        let offset = self.preferredContentSize.width * 2 / 15
+        let barColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
+
+        selectImageButton = UIButton(frame: CGRect(x: offset, y: 330, width: self.preferredContentSize.width - offset * 2, height: 50))
+        selectImageButton.backgroundColor = barColor
+        selectImageButton.setTitle("Select Image", for: .normal)
+        selectImageButton.setTitleColor(.white, for: .normal)
+        selectImageButton.setTitleColor(barColor, for: .highlighted)
+        selectImageButton.setBackgroundColor(.white, for: .highlighted)
+        selectImageButton.layer.borderColor = barColor.cgColor
+        selectImageButton.layer.borderWidth = 1
+        selectImageButton.layer.cornerRadius = 10
+        selectImageButton.clipsToBounds = true
+        selectImageButton.addTarget(self, action: #selector(addProfilePic), for: .touchUpInside)
+        scrollView.addSubview(selectImageButton)
+        
+        imageView = UIImageView(frame: CGRect(x: offset, y: 400, width: self.preferredContentSize.width - offset * 2 , height: self.preferredContentSize.width - offset * 2))
+        imageView.backgroundColor = barColor
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        scrollView.addSubview(imageView)
+        
+    }
+    
+    @objc func addProfilePic() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
     
     func setupBg() {
         bg = UIView(frame: view.frame)
@@ -42,19 +77,17 @@ class SignupViewController: UIViewController {
     }
     
     func setupScrollView() {
+        let offset = self.preferredContentSize.width * 2 / 15
         scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.preferredContentSize.width, height: self.preferredContentSize.height))
-        scrollView.contentSize = CGSize(width: 1000, height: 1000)
-        scrollView.isScrollEnabled = false
+        scrollView.contentSize = CGSize(width: self.preferredContentSize.width, height: 400 + self.preferredContentSize.width - offset * 2 + 80)
         view.addSubview(scrollView)
         
-        restofView = UIView(frame: CGRect(x: 0, y: self.preferredContentSize.height, width: self.preferredContentSize.width, height: self.preferredContentSize.height))
-        restofView.backgroundColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
-        scrollView.addSubview(restofView)
         yToGoTo = self.preferredContentSize.height / 3
     }
     
     func setupSignUpButton() {
-        signupButton = UIButton(frame: CGRect(x: 0, y: self.preferredContentSize.height - 60, width: self.preferredContentSize.width, height: 60))
+        let offset = self.preferredContentSize.width * 2 / 15
+        signupButton = UIButton(frame: CGRect(x: 0, y: 400 + self.preferredContentSize.width - offset * 2 + 20, width: self.preferredContentSize.width, height: 60))
         let buttonColor = UIColor(red: 29/255, green: 209/255, blue: 161/255, alpha: 1.0)
         signupButton.backgroundColor = buttonColor
         signupButton.setTitle("Sign Up", for: .normal)
@@ -89,6 +122,14 @@ class SignupViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
                 self.presentingViewController?.childViewControllers[0].performSegue(withIdentifier: "loggedin", sender: self)
                 FirebaseAPIClient.createNewUser(id: user!.uid, name: self.nameTextField.text!, email: self.emailTextField.text!, username: self.usernameTextField.text!)
+                //upload profile pic
+                if self.imageView.image != nil {
+                    StorageHelper.uploadMedia(postID: (user?.uid)!, image: self.imageView.image!)
+                } else {
+                //can set up default.
+                    let image = UIImage(named: "defaultprofile")
+                    StorageHelper.uploadMedia(postID: (user?.uid)!, image: image!)
+                }
             }
         }
     }
@@ -152,4 +193,19 @@ extension SignupViewController: UITextFieldDelegate {
         let point = CGPoint(x: 0, y: 0)
         self.scrollView.setContentOffset(point, animated: true)
     }
+}
+
+
+extension SignupViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        imageView.image = image
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

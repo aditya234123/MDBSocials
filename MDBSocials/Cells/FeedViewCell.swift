@@ -9,14 +9,22 @@
 import UIKit
 import Hero
 
+protocol feedViewCellDelegate {
+    func addModalView(id: String)
+}
+
 class FeedViewCell: UICollectionViewCell {
     
+    var modalView: AKModalView!
     var image: UIImageView!
     var nameLabel: UILabel!
     var eventLabel: UILabel!
     var starImageView: UIImageView!
-    var RSVP: UILabel!
+    var RSVP: UIButton!
     var date: UILabel!
+    var id: String?
+    
+    var delegate: feedViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,18 +64,24 @@ class FeedViewCell: UICollectionViewCell {
         date.adjustsFontSizeToFitWidth = true
         contentView.addSubview(date)
         
-        RSVP = UILabel(frame: CGRect(x: contentView.frame.width - 33, y: 120, width: 20, height: 20))
-        RSVP.textColor = secondTextColor
-        RSVP.font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        RSVP = UIButton(frame: CGRect(x: contentView.frame.width - 33, y: 120, width: 20, height: 20))
+        RSVP.setTitleColor(secondTextColor, for: .normal)
+        RSVP.titleLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        RSVP.backgroundColor = .clear
+        RSVP.addTarget(self, action: #selector(labelTapped), for: .touchUpInside)
         contentView.addSubview(RSVP)
         
         eventLabel.text = ""
         nameLabel.text = ""
-        RSVP.text = ""
+        RSVP.setTitle("", for: .normal)
         
         self.clipsToBounds = true
     }
     
+    @objc func labelTapped() {
+        
+        delegate?.addModalView(id: self.id!)
+    }
     
     
     

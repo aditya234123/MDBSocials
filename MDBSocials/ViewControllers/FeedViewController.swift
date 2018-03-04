@@ -144,27 +144,36 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
             x.removeFromSuperview()
         }
         cell.awakeFromNib()
+        cell.delegate = self
         let post = posts[indexPath.item]
+        cell.id = post.id
         StorageHelper.getProfilePic(id: post.id!, withBlock: { (image) in
             post.image = image
-            cell.image.image = self.posts[indexPath.item].image!
+            DispatchQueue.main.async{
+                cell.image.image = self.posts[indexPath.item].image!
+                cell.setNeedsLayout()
+            }
         })
-        FirebaseAPIClient.fetchInterested(postID: post.id!) { (userID) in
-            if userID == self.currentUser?.id {
+        
+        //FIX THIS SADNESS
+        FirebaseAPIClient.fetchInterested(postID: post.id!) { (arr) in
+            if arr[0] == self.currentUser?.id {
                 post.userInterested = true
                 let image = UIImage(named: "star2")
                 DispatchQueue.main.async {
                     cell.starImageView.image = image
+                    cell.setNeedsLayout()
                 }
             }
+        
         }
         FirebaseAPIClient.fetchRSVP(postID: post.id!) { (rsvpNum) in
-            cell.RSVP.text = "\(rsvpNum)"
+            cell.RSVP.setTitle("\(rsvpNum)", for: .normal)
             post.RSVP = rsvpNum
         }
         cell.nameLabel.text = post.personName
         cell.eventLabel.text = post.eventName
-        cell.RSVP.text = "\(post.RSVP!)"
+        cell.RSVP.setTitle("\(post.RSVP!)", for: .normal)
         cell.date.text = post.date
         
         if post.userInterested! {
@@ -195,5 +204,16 @@ extension FeedViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
 }
+
+extension FeedViewController: feedViewCellDelegate {
     
+    func addModalView(id: String) {
+        let list = InterestedListView(frame: CGRect(x: 50, y: 50, width: view.frame.width - 100, height: view.frame.height - 100), id: id)
+        let modalView = AKModalView(view: list)
+        modalView.dismissAnimation = .FadeOut
+        self.navigationController?.view.addSubview(modalView)
+        modalView.show()
+    }
+
+}
 

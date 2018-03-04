@@ -114,7 +114,7 @@ class DetailViewController: UIViewController {
         let rsvpIncr = (post?.RSVP)! + 1
         RSVP.text = "\(rsvpIncr)"
         
-        FirebaseAPIClient.eventRSVP(postID: (post?.id)!, userID: (currentUser?.id)!)
+        FirebaseAPIClient.eventRSVP(postID: (post?.id)!, user: currentUser!)
         
     }
 

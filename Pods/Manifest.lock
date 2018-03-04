@@ -52,6 +52,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Spring (1.0.5)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -59,6 +60,16 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseUI/Auth
   - Hero (~> 1.1)
+  - Spring (from `https://github.com/MengTo/Spring.git`)
+
+EXTERNAL SOURCES:
+  Spring:
+    :git: https://github.com/MengTo/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: 19b04d730d3edabbb02a39e58121d1d3220690ee
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
   Firebase: 7d3b8cd837ad9fcd391657734c0d56dab8e9a5a3
@@ -74,7 +85,8 @@ SPEC CHECKSUMS:
   Hero: ce59e81c79390613d97b43da7179e2c5e1017e04
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Spring: 48aad470f3ead043b2da98b64e0bf0630b7ebc42
 
-PODFILE CHECKSUM: 71fc4f91b10f3bcd9f050f48ecea385aa104876e
+PODFILE CHECKSUM: 2bc5ee9bc972905bb87c5c711a62e2d499e526f9
 
 COCOAPODS: 1.1.1

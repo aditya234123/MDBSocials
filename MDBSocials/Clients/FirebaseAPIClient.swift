@@ -51,10 +51,14 @@ class FirebaseAPIClient {
         })
     }
     
-    static func fetchInterested(postID: String, withBlock: @escaping (String) -> ()) {
-        let ref = Database.database().reference().child("Interested")
-        ref.child(postID).observe(.childAdded, with: { (snapshot) in
-            withBlock(snapshot.key)
+    static func fetchInterested(postID: String, withBlock: @escaping ([String]) -> ()) {
+
+        let ref = Database.database().reference().child("Interested").child(postID)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let id = snapshot.key as! String
+            let name = snapshot.value as! String
+            let dict = [id, name]
+            withBlock(dict)
         })
     }
     
@@ -65,7 +69,7 @@ class FirebaseAPIClient {
         })
     }
     
-    static func eventRSVP(postID: String, userID: String) {
+    static func eventRSVP(postID: String, user: UserModel) {
         let ref = Database.database().reference()
         ref.child("Posts").child(postID).runTransactionBlock({ (currentData:MutableData) -> TransactionResult in
             if var post = currentData.value as? [String: AnyObject] {
@@ -79,8 +83,7 @@ class FirebaseAPIClient {
             }
             return TransactionResult.abort()
         })
-        
-        ref.child("Interested").child(postID).setValue([userID : ""])
+        ref.child("Interested").child(postID).setValue([user.id! : user.name!])
     }
     
 }
